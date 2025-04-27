@@ -6,8 +6,9 @@ Computing
 
 
 ## Architecture 
-
+![Cloud Architecture](F1_Predictions-Architecture.png "Architecture")
 
 
 
 ## Process Flow 
+![Predictions Process Flow](F1_Predictions-Flow.png "Process Flow")
