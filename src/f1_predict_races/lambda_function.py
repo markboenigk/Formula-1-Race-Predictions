@@ -27,8 +27,8 @@ def lambda_handler(event, context):
     Returns:
         dict: Response with status and prediction metadata.
     """
-    bucket = "f1-race-prediction"
-    base_path = "transformed"
+    bucket = "<your-aws-bucket>"
+    base_path = "<your-directory>"
     race_name = event["gp_name"]
     race_season = event["gp_season"]
     target_column = event["target_column"]
