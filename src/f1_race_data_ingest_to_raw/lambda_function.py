@@ -228,9 +228,9 @@ def lambda_handler(event, context):
     Returns:
         dict: Response containing status code and success message.
     """
-    application = "f1-race-predictions"
-    environment = "development"
-    configuration_profile = "f1-data-ingestion-config"
+    application = "<your-appconfig-application-name>"
+    environment = "<your-environment>"
+    configuration_profile = "<your configuration-profile>"
     fastf1.Cache.enable_cache('/tmp')
 
     # Retrieve configuration from AppConfig
@@ -246,11 +246,11 @@ def lambda_handler(event, context):
                                      file_name='schedules.parquet')
 
     # Check existing files in S3
-    lap_files = get_lap_file_paths(bucket_name='f1-race-prediction',
-                                    base_path='raw/',
+    lap_files = get_lap_file_paths(bucket_name='<your-bucket-name>',
+                                    base_path='<your-directory>',
                                     file_ending='_laps.parquet')
-    session_results_files = get_session_results_file_paths(bucket_name='f1-race-prediction',
-                                                            base_path='raw/',
+    session_results_files = get_session_results_file_paths(bucket_name='<your-bucket-name>',
+                                                            base_path='<your-directory>',
                                                             file_ending='_results.parquet')
 
     schedules_trans_w_file_checks = add_file_checks_to_schedule(schedules_t,
@@ -268,8 +268,8 @@ def lambda_handler(event, context):
     ]
 
     process_and_store_sessions(past_sessions_wo_data,
-                                bucket_name='f1-race-prediction',
-                                base_path='raw/')
+                                bucket_name='<your-bucket-name>',
+                                base_path='<your-directory>')
 
     return {
         'statusCode': 200,
