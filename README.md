@@ -9,7 +9,6 @@ It utilizes various Python packages like Pandas, Sklearn and machine learning al
   <li>Compute: AWS Lambdas (with Docker) </li>
   <li>Storage: AWS S3 </li>
   <li>Algorithms: Linear Regression, Random Forrest, Gradient Boost </li>
-  <li>Notifications: Telegram API / Bot </li>
   <li>Testing: Postman / Docker </li>
 </ul>
 
@@ -24,8 +23,8 @@ I chose R² because it is relatively easy to interpret, is able to compare diffe
 
 
 ## ⏩️ Process Flow 
-1. **Data Ingestion:** The ```f1_race_data_ingest_to_raw``` Lambda function fetches the configuration from AWS AppConfig to retrieve the season it should ingests into S3. It also checks if the data already exists in S3 to avoid unecessary processing. After each run it notifies the user via Telegram API about the number of processed rows. 
-2. **Data Transformation:** The ```f1_transform_race_data``` Lambda function transforms the raw data by converting lap times, enriches the data with new features like driver standings, and stores the result in S3 in the transformed layer. After each run it notifies the user via Telegram API about the number of processed rows. 
+1. **Data Ingestion:** The ```f1_race_data_ingest_to_raw``` Lambda function fetches the configuration from AWS AppConfig to retrieve the season it should ingests into S3. It also checks if the data already exists in S3 to avoid unecessary processing. 
+2. **Data Transformation:** The ```f1_transform_race_data``` Lambda function transforms the raw data by converting lap times, enriches the data with new features like driver standings, and stores the result in S3 in the transformed layer. 
 3. **Model Training:** The ```f1_predict_races``` Lambda function is deployed as a Docker container to accomodate the additional libraries like sklearn. The function trains three different algorithms on the data to determine the best model accordig to R2. It also automatically selects the most relevant features with the ```SelectKBest``` method. In the end it returns the prediction of the race as well as model metadata, the most important features and the R2 of the best model versus the base model with only the qualifying time as variable.
 
 ## 🔧 Usage 
